@@ -15,7 +15,7 @@ class SliderSection extends StatelessWidget {
       "https://kalidas365itsolutions.wordpress.com/wp-content/uploads/2014/06/every-sale.jpg",
       "https://helloyubo.com/wp-content/uploads/2022/09/IMG-20220913-WA0040-1024x465.jpg"
     ];
-    return Column(
+    return Stack(
       children: [
         CarouselSlider.builder(
           itemCount: slider.length,
@@ -47,14 +47,18 @@ class SliderSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
           ),
         ),
-        const SizedBox(
-          height: 15,
-        ),
-        Obx(
-          () => AnimatedSmoothIndicator(
-            activeIndex: sliderController.activeIndex.value,
-            count: slider.length,
-            effect: const SwapEffect(),
+        Positioned(
+          bottom: 10,
+          right: 0,
+          left: 0,
+          child: Center(
+            child: Obx(
+              () => AnimatedSmoothIndicator(
+                activeIndex: sliderController.activeIndex.value,
+                count: slider.length,
+                effect: const SwapEffect(),
+              ),
+            ),
           ),
         ),
       ],
