@@ -11,9 +11,7 @@ class ProductSliderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> productslider = [
-      "https://d2v5dzhdg4zhx3.cloudfront.net/web-assets/images/storypages/primary/ProductShowcasesampleimages/JPEG/Product+Showcase-1.jpg",
-      "https://5.imimg.com/data5/SELLER/Default/2022/1/QZ/AO/RT/142262681/istockphoto-1301394040-170667a.jpg",
-      "https://images.unsplash.com/photo-1631087606988-a6be38fccaf6?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2hvZXMlMjBwaG90b2dyYXBoeXxlbnwwfHwwfHx8MA%3D%3D",
+
     ];
 
     final SliderController sliderController = Get.put(SliderController());
