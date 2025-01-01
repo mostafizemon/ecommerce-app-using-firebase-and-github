@@ -1,5 +1,4 @@
 import 'package:e_commarce_app_firebase/screens/product_details/product_details.dart';
-import 'package:e_commarce_app_firebase/widgets/price_and_discountprice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,10 +51,36 @@ class ProductSection extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  const PriceAndDiscountPrice(
-                    price: 40.25,
-                    afterdiscount: 35,
-                    percentiseoff: 15,
+                  const  Row(
+                    children: [
+                      Text(
+                        "\$35",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                        const SizedBox(width: 10),
+                        Text(
+                          "\$40.25",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+
+                        const SizedBox(width: 5),
+                        Text(
+                          "15% OFF",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Colors.deepOrangeAccent,
+                          ),
+                        ),
+                      ],
                   ),
                   const Row(
                     children: [
