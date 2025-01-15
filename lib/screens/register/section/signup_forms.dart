@@ -1,3 +1,4 @@
+import 'package:e_commarce_app_firebase/controller/auth_controller.dart';
 import 'package:e_commarce_app_firebase/controller/obscure_text_controller.dart';
 import 'package:flutter/Material.dart';
 import 'package:get/get.dart';
@@ -7,14 +8,23 @@ class SignupForms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    final ObscureTextController signupController = Get.put(ObscureTextController());
+    final controller = Get.put(AuthController());
+
+    final ObscureTextController signupController =
+        Get.put(ObscureTextController());
     return Form(
-      key: _formKey,
+      key: controller.registerKey,
       child: Column(
         children: [
           // Full Name Field
           TextFormField(
+            controller: controller.fullnamecontroller,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "This field can not be empty";
+              }
+              return null;
+            },
             onSaved: (value) {},
             decoration: const InputDecoration(
               hintText: "Full Name",
@@ -24,6 +34,13 @@ class SignupForms extends StatelessWidget {
 
           // Email Field
           TextFormField(
+            controller: controller.emailcontroller,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "This field can not be empty";
+              }
+              return null;
+            },
             onSaved: (value) {},
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
@@ -35,6 +52,13 @@ class SignupForms extends StatelessWidget {
           // Password Field
           Obx(
             () => TextFormField(
+              controller: controller.passwordcontroller,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "This field can not be empty";
+                }
+                return null;
+              },
               obscureText: signupController.obscureTextpassword.value,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -61,6 +85,13 @@ class SignupForms extends StatelessWidget {
           // Confirm Password Field
           Obx(
             () => TextFormField(
+              controller: controller.confirmpasswordcontroller,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "This field can not be empty";
+                }
+                return null;
+              },
               obscureText: signupController.obscureTextconfirmppassword.value,
               decoration: InputDecoration(
                 hintText: "Confirm Password",
@@ -79,21 +110,24 @@ class SignupForms extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Sign Up Button
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFF7643),
-              foregroundColor: Colors.white,
-              minimumSize: const Size(double.infinity, 40),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+          Obx(
+            () => ElevatedButton(
+              onPressed: () {
+                controller.register();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFFF7643),
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
+              child: Text(controller.isLoading.value ? "Loading.." : "Sign Up"),
             ),
-            child: const Text("Sign Up"),
           ),
         ],
       ),
     );
-    ;
   }
 }

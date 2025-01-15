@@ -1,8 +1,10 @@
+import 'package:e_commarce_app_firebase/controller/auth_controller.dart';
 import 'package:e_commarce_app_firebase/screens/login/section/no_account_text.dart';
 import 'package:e_commarce_app_firebase/screens/login/section/sign_in_form.dart';
 import 'package:e_commarce_app_firebase/widgets/social_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../svg_icons/svg_icons.dart';
 
@@ -11,6 +13,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final controller=Get.put(AuthController());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

@@ -1,8 +1,8 @@
 import 'package:e_commarce_app_firebase/controller/obscure_text_controller.dart';
-import 'package:e_commarce_app_firebase/screens/home_screens/home.dart';
 import 'package:flutter/Material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../controller/auth_controller.dart';
 import '../../../svg_icons/svg_icons.dart';
 
 class SignInForm extends StatelessWidget {
@@ -12,10 +12,19 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     ObscureTextController obscureTextController =
         Get.put(ObscureTextController());
+    final controller = Get.put(AuthController());
+
     return Form(
+      key: controller.loginKey,
       child: Column(
         children: [
           TextFormField(
+            controller: controller.emailcontroller,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "This field can not be empty";
+              }
+            },
             onSaved: (email) {},
             onChanged: (email) {},
             textInputAction: TextInputAction.next,
@@ -34,6 +43,12 @@ class SignInForm extends StatelessWidget {
               children: [
                 Obx(
                   () => TextFormField(
+                    controller: controller.passwordcontroller,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "This field can not be empty";
+                      }
+                    },
                     onSaved: (password) {},
                     onChanged: (password) {},
                     obscureText:
@@ -76,21 +91,22 @@ class SignInForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () {
-              Get.to(() => const Home());
-            },
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: const Color(0xFFFF7643),
-              foregroundColor: Colors.white,
-              minimumSize: const Size(double.infinity, 48),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+          Obx(() {
+            return ElevatedButton(
+              onPressed: () => controller.login(),
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                backgroundColor: const Color(0xFFFF7643),
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 48),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
               ),
-            ),
-            child: const Text("Continue"),
-          )
+              child:
+                  Text(controller.isLoading.value ? "Loading.." : "Continue"),
+            );
+          }),
         ],
       ),
     );
