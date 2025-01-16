@@ -29,7 +29,7 @@ class Categories extends StatelessWidget {
         }
 
         return SizedBox(
-          height: 90,
+          height: 95,
           child: ListView.separated(
             itemCount: snapshot.data!.docs.length,
             separatorBuilder: (context, index) {
