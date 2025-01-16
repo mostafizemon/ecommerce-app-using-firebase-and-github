@@ -5,18 +5,19 @@ import 'package:flutter/Material.dart';
 import '../../widgets/toproundedcontainer.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  final Map<String, dynamic> productsdetails;
+  const ProductDetails({super.key, required this.productsdetails});
 
   @override
   Widget build(BuildContext context) {
     return   Scaffold(
       backgroundColor: Colors.white,
-      body: const SingleChildScrollView(
+      body:  SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProductSliderSection(),
-            DetailsSection(),
+            ProductSliderSection(productsslider: productsdetails,),
+            DetailsSection(productsdetails: productsdetails,),
           ],
         ),
       ),

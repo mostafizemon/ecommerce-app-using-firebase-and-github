@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commarce_app_firebase/screens/category_products/category_products.dart';
 import 'package:flutter/Material.dart';
+import 'package:get/get.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -38,30 +40,33 @@ class Categories extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final category = snapshot.data!.docs[index];
-              return Column(
-                children: [
-                  Container(
-                    width: 65,
-                    height: 65,
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(.2),
-                      shape: BoxShape.circle,
+              return InkWell(
+                onTap: ()=>Get.to(()=>CategoryProducts(category: category.data())),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 65,
+                      height: 65,
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: category['icon'] != null
+                          ? Image.network(
+                              category['icon'],
+                              height: 25,
+                              fit: BoxFit.cover,
+                            )
+                          : const Icon(Icons.image_not_supported),
                     ),
-                    child: category['icon'] != null
-                        ? Image.network(
-                            category['icon'],
-                            height: 25,
-                            fit: BoxFit.cover,
-                          )
-                        : const Icon(Icons.image_not_supported),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    category['name'] ?? 'No Name',
-                    style: const TextStyle(fontSize: 12),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    Text(
+                      category['name'] ?? 'No Name',
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               );
             },
           ),

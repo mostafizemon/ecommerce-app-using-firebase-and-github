@@ -6,13 +6,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controller/slide_indicator_index_controller.dart';
 
 class ProductSliderSection extends StatelessWidget {
-  const ProductSliderSection({super.key});
+  final Map<String, dynamic> productsslider;
+  const ProductSliderSection({super.key, required this.productsslider});
 
   @override
   Widget build(BuildContext context) {
-    List<String> productslider = [
-
-    ];
+    final gallery=productsslider['gallery'];
 
     final SliderController sliderController = Get.put(SliderController());
 
@@ -20,12 +19,12 @@ class ProductSliderSection extends StatelessWidget {
       children: [
         // Carousel Slider
         CarouselSlider.builder(
-          itemCount: productslider.length,
+          itemCount: gallery.length,
           itemBuilder: (context, index, pageindex) {
             return Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(productslider[index]),
+                  image: NetworkImage(gallery[index]),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -49,7 +48,7 @@ class ProductSliderSection extends StatelessWidget {
             children: [
               // Back Button
               IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                icon: const Icon(Icons.arrow_back, color: Color(0xFFFF7643)),
                 onPressed: () {
                   Get.back();
                 },
@@ -59,7 +58,7 @@ class ProductSliderSection extends StatelessWidget {
                   // Wishlist Icon
                   IconButton(
                     icon:
-                        const Icon(Icons.favorite_border, color: Colors.white),
+                        const Icon(Icons.favorite_border, color: Color(0xFFFF7643)),
                     onPressed: () {
                       // TODO: Wishlist
                     },
@@ -67,7 +66,7 @@ class ProductSliderSection extends StatelessWidget {
                   // Cart Icon
                   IconButton(
                     icon: const Icon(Icons.add_shopping_cart_rounded,
-                        color: Colors.white),
+                        color: Color(0xFFFF7643)),
                     onPressed: () {
                       // TODO: CartIcon
                     },
@@ -86,7 +85,7 @@ class ProductSliderSection extends StatelessWidget {
             child: Obx(
               () => AnimatedSmoothIndicator(
                 activeIndex: sliderController.activeIndexProductsdetails.value,
-                count: productslider.length,
+                count: gallery.length,
                 effect: const ExpandingDotsEffect(),
               ),
             ),

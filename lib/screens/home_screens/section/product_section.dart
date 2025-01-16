@@ -39,7 +39,7 @@ class ProductSection extends StatelessWidget {
                   final products = snapshot.data!.docs[index];
                   return InkWell(
                     onTap: () {
-                      Get.to(() => const ProductDetails());
+                      Get.to(() =>  ProductDetails(productsdetails: products.data(),));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class ProductSection extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               image: NetworkImage(
-                                products['image'],
+                                products['thumbnail'],
                               ),
                               fit: BoxFit.contain,
                             ),
@@ -81,7 +81,7 @@ class ProductSection extends StatelessWidget {
                             if (products['discount_price'] != null) ...[
                               const SizedBox(width: 10),
                               Text(
-                                "৳${products['discount_price']}",
+                                "৳${products['orginial_price']}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
