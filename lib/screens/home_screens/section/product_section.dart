@@ -39,7 +39,7 @@ class ProductSection extends StatelessWidget {
                   final products = snapshot.data!.docs[index];
                   return InkWell(
                     onTap: () {
-                      Get.to(() =>  ProductDetails(productsdetails: products.data(),));
+                      Get.to(() =>  ProductDetails(productsdetails: products.data(), productid: products.id,));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

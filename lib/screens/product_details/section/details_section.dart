@@ -69,7 +69,7 @@ class DetailsSection extends StatelessWidget {
            Text(
             productsdetails['description'],
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
             ),
           ),

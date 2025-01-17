@@ -59,7 +59,7 @@ class CategoryProducts extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           Get.to(() => ProductDetails(
-                                productsdetails: products.data(),
+                                productsdetails: products.data(), productid: products.id,
                               ));
                         },
                         child: Column(
