@@ -1,6 +1,8 @@
 import 'package:e_commarce_app_firebase/screens/cart_view/section/cart_design.dart';
 import 'package:flutter/Material.dart';
+import 'package:get/get.dart';
 
+import '../../controller/cart_controller.dart';
 import '../../widgets/toproundedcontainer.dart';
 
 class CartView extends StatelessWidget {
@@ -8,23 +10,14 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = Get.put(CartController());
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("My Cart"),
         backgroundColor: Colors.white,
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        itemBuilder: (context, index) {
-          return const CartDesign();
-        },
-        separatorBuilder: (context, index) {
-          return const SizedBox(
-            height: 5,
-          );
-        },
-        itemCount: 10,
-      ),
+      body: const CartDesign(),
       bottomNavigationBar: TopRoundedContainer(
         color: Colors.white,
         child: SafeArea(
@@ -33,10 +26,13 @@ class CartView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Total Amount: \$100",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+                  Obx(() {
+                    return Text(
+                      "Total Amount:৳ ${cartController.totalAmount.value.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    );
+                  }),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
